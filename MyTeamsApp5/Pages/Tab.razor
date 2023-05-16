@@ -1,0 +1,25 @@
+﻿@page "/"
+@page "/tab"
+@using MyTeamsApp5.Components;
+@inject MicrosoftTeams MicrosoftTeams;
+
+
+<div>
+    <Hello />
+</div>
+
+
+
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(firstRender);
+
+        if (firstRender)
+        {
+            await MicrosoftTeams.InitializeAsync();
+            await MicrosoftTeams.NavigateToApp("<teamsAppId>", "index2");
+        }
+    }
+}
